@@ -1,0 +1,6 @@
+.no-print {display:none}
+
+.stacktack-container {
+    box-shadow: none;
+    border: 5px #eee solid;
+}
