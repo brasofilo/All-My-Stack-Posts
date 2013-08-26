@@ -53,7 +53,7 @@ Changelog
 Credits
 ===========
 
-This class is built and maintained by [Rodolfo Buaiz](http://brasofilo.com "brasofilo").
+This plugin is built and maintained by [Rodolfo Buaiz](http://brasofilo.com), aka brasofilo.
 
 License
 ===========
