@@ -2,20 +2,16 @@
 /**
  * Template Name: Stack Q&A's
  *
- * The template used  to demonstrate how to include 
+ * Used by the plugin All My Stack Posts
  * 
- * @package Page Template Example
- * @since 	0.1
- * @version	0.1
  */
 
 # Get plugin utilities and properties
 $plugin = B5F_SE_MyQA::get_instance();
-$sites = $plugin->metabox->b5f_get_se_sites();
 
 # Get page meta data
 global $post;
-$site = get_post_meta( $post->ID, 'se_site', true );
+$se_site = get_post_meta( $post->ID, 'se_site', true );
 $user_id = get_post_meta( $post->ID, 'se_user_id', true );
 $disable_cache = get_post_meta( $post->ID, 'se_cached', true );
 $per_page = get_post_meta( $post->ID, 'se_per_page', true );
@@ -24,15 +20,33 @@ $q_or_a = get_post_meta( $post->ID, 'se_post_type', true );
 # StackPHP
 require_once $plugin->plugin_path.'includes/config.php';
 
+#Zebra Pagination
+require_once $plugin->plugin_path.'includes/Zebra_Pagination.php';
+$pagination_zebra = new Zebra_Pagination();
+$pagination_zebra->navigation_position(
+		isset($_GET['navigation_position']) && in_array($_GET['navigation_position'], array('left', 'right')) 
+		? $_GET['navigation_position'] : 'outside'
+);
+
+
+// Retrieve all Stack Exchange sites across all pages.
+$response = API::Sites();
+$sites = array();
+while( $site = $response->Fetch(TRUE) )
+{
+	$temp = $site->Data();
+	$sites[$temp['api_site_parameter']] = $temp;
+}
+
 # Selected properties
-$site_name = $sites[$site][0];
-$site_link = $sites[$site][1];
-$site_desc = $sites[$site][2];
+$site_name = $sites[$se_site]['name'];
+$site_link = $sites[$se_site]['site_url'];
+$site_desc = $sites[$se_site]['audience'];
 $css = $plugin->plugin_url . 'css/style.css';
 $css_print = $plugin->plugin_url . 'css/print.css';
 
 # Query site and user
-$user = API::Site($site)->Users($user_id);
+$user = API::Site($se_site)->Users($user_id);
 $user_data = $user->Exec()->Fetch();
 
 # Add some items to the next queries
@@ -54,9 +68,17 @@ else
 	$showing_type = 'Answers';
 	$request = $user->Answers()->SortByCreation()->Ascending()->Filter($filter->GetID())->Exec()->Page($current_page)->Pagesize($per_page);
 }	
-	//while($answer = $request->Fetch(FALSE))
-	//	var_dump($answer);
-	//die();
+
+if( !$request->Fetch(false) )
+	wp_die(
+        'Could not retrieve any data. Please, check the User ID and Site combination.', 
+        'Stack Error',  
+        array( 
+            'response' => 500, 
+            'back_link' => true 
+        )
+    );  
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -80,25 +102,18 @@ else
 	# Pagination
 	$tot_pages = $request->Total();
 	$pagination = ceil( $tot_pages / $per_page );
-	
-	echo '<span class="no-print pagination"><b>Pages</b>: ';
-	for( $i = 1; $i <= $pagination; $i++ )
-	{
-		$sep = ( $i == $pagination ) ? '' : ' | ';
-		$current_page_class = ( $current_page == $i ) ? ' class="current-page"' : '';
-		printf(
-				'<a href="?se_paged=%s"%s>%s</a>%s',
-				$i,
-				$current_page_class,
-				$i,
-				$sep
-		);
-	}	
-	
+    $pagination_zebra->records($tot_pages);
+    $pagination_zebra->records_per_page($per_page);
+	$pagination_zebra->variable_name('se_paged');
+	$pagination_zebra->labels('&nbsp;','&nbsp;');
+	$pagination_zebra->selectable_pages('15');
+	$pagination_zebra->padding(false);
+		
 	# Post counter
 	$count = 1 + ( ($current_page-1) * $per_page );
+	$start_post = $count;
 	$end_post = ( $current_page == $pagination ) ? $tot_pages : intval($count+$per_page-1);
-	echo '<br /><sub><b>Showing '. $showing_type.':</b> ' . $count . ' to ' . $end_post . ' from ' . $tot_pages . '</sub></span>';
+	//echo '</div>';
 	
 	# Loop
 	if( 'answers' == $q_or_a )
@@ -106,22 +121,32 @@ else
 		while( $answer = $request->Fetch(FALSE) )
 		{ 
 			# Query Question
-			$q =  API::Site($site)->Questions($answer['question_id']);
+			$q =  API::Site($se_site)->Questions($answer['question_id']);
 			$qq = $q->Filter('!-.dP0*IiKY0d')->Exec()->Fetch(FALSE);
 		
 			# Set Question properties
 			$qtags = !empty($qq['tags']) ? '<span>'.implode('</span><span>', $qq['tags'] ).'</span>' : '';
 			$qauthor = $qq['owner']['display_name'];
 			$qauthorlink = $qq['owner']['link'];
+			$qdate = date('d/m/Y', $qq['creation_date'] );
+			$qscore = $plugin->metabox->get_score( $qq['score'], '| ', '' );
 			$qqbod = isset( $qq['body'] ) ? $qq['body'] : '<i>could not retrieve question body</i>'; 
+			if( isset( $qq['owner']['profile_image'] ) )
+			{
+				$avatar_image = $qq['owner']['profile_image'] ;
+				$avatar_image = str_replace( 's=128', 's=24', $avatar_image );
+				$avatar = "<img src='$avatar_image' />";
+			}
+			else
+				$avatar = '';
 		
 			# Set Answer properties
 			$tit = $answer['title'];
-			$qdate = date('d/m/Y', $qq['creation_date'] );
 			$link = $answer['link'];
 			$body = $answer['body'];
-			$score = $answer['score'];
-			$accepted = ( isset( $answer['is_accepted']) && $answer['is_accepted'] ) ? '- <span class="accepted">Accepted</span>' : '';
+			//$score = $answer['score'];
+			$score = $plugin->metabox->get_score( $answer['score'], '', ' - ' );
+			$accepted = ( isset( $answer['is_accepted']) && $answer['is_accepted'] ) ? '<span class="accepted">Accepted</span>' : '';
 			$author = $answer['owner']['display_name'];
 			$authorlink = $answer['owner']['link'];
 			$date = date('d/m/Y', $answer['creation_date'] );
@@ -132,7 +157,8 @@ else
 				<div class="branding">$count</div>
 
 				<div class="question-body">
-					<a href="$link" target="_blank" class="heading">$tit</a><a href="$qauthorlink" class="user-link">$qauthor</a><span class="user-link"> | $qdate</span>
+					<a href="$qauthorlink" class="user-link">$avatar $qauthor</a><span class="user-link"> | $qdate $qscore</span>
+					<a href="$link" target="_blank" class="heading">$tit</a>
 
 					<div class="hr"></div>
 					$qqbod
@@ -140,7 +166,7 @@ else
 				</div>
 
 				<div class="answer-body">
-					<a href="$link" target="_blank" class="heading answer-count">$score votes $accepted</a>
+					<a href="$link" target="_blank" class="heading answer-count">$score $accepted</a>
 
 					<a href="$authorlink" class="user-link">$author</a><span class="user-link"> | $date</span>
 
@@ -180,34 +206,41 @@ HTML;
 				</div>
 HTML;
 			# Output Answers divs
-			foreach( $question['answers'] as $qanswer )
+			if( !empty( $question['answers'] ) )
 			{
-				# Set Answer properties
-				$body = $qanswer['body'];
-				$score = $plugin->metabox->get_score( $qanswer['score'], '', ' - ' );
-				$accepted = ( isset( $qanswer['is_accepted']) && $qanswer['is_accepted'] ) ? '<span class="accepted-text">Accepted</span>' : '';
-				$accepted_bg = ( isset( $qanswer['is_accepted']) && $qanswer['is_accepted'] ) ? 'accepted-bg' : '';
-				$author = $qanswer['owner']['display_name'];
-				$authorlink = isset( $qanswer['owner']['link'] ) ? $qanswer['owner']['link'] : '#';
-				$date = date('d/m/Y', $qanswer['creation_date'] );
-				if( isset( $qanswer['owner']['profile_image'] ) )
+				foreach( $question['answers'] as $qanswer )
 				{
-					$avatar_image = $qanswer['owner']['profile_image'] ;
-					//if( strpos( $qanswer['owner']['profile_image'], 'gravatar.com' ) === false )
-						$avatar_image = str_replace( 's=128', 's=32', $avatar_image );
-					$avatar = "<img src='$avatar_image' />";
-				}
-				else
-					$avatar = '';
-				echo <<<HTML
-				<div class="answer-body">
-					<div class="answer-title $accepted_bg">$avatar $score $accepted
+					# Set Answer properties
+					$body = $qanswer['body'];
+					$score = $plugin->metabox->get_score( $qanswer['score'], '', ' - ' );
+					$accepted = ( isset( $qanswer['is_accepted']) && $qanswer['is_accepted'] ) ? '<span class="accepted-text">Accepted</span>' : '';
+					$accepted_bg = ( isset( $qanswer['is_accepted']) && $qanswer['is_accepted'] ) ? 'accepted-bg' : '';
+					$author = $qanswer['owner']['display_name'];
+					$authorlink = isset( $qanswer['owner']['link'] ) ? $qanswer['owner']['link'] : '#';
+					$date = date('d/m/Y', $qanswer['creation_date'] );
+					if( isset( $qanswer['owner']['profile_image'] ) )
+					{
+						$avatar_image = $qanswer['owner']['profile_image'] ;
+						//if( strpos( $qanswer['owner']['profile_image'], 'gravatar.com' ) === false )
+							$avatar_image = str_replace( 's=128', 's=32', $avatar_image );
+						$avatar = "<img src='$avatar_image' />";
+					}
+					else
+						$avatar = '';
+					echo <<<HTML
+					<div class="answer-body">
+						<div class="answer-title $accepted_bg">$avatar $score $accepted
 
-					<a href="$authorlink" class="user-link">$author</a><span class="user-link"> | $date</span></div>
+						<a href="$authorlink" class="user-link">$author</a><span class="user-link"> | $date</span></div>
 
-					$body
-				</div>
+						$body
+					</div>
 HTML;
+				}
+			}
+			else
+			{
+				echo '<i>no answers</i>';
 			}
 			
 			# Close Question div
@@ -217,7 +250,10 @@ HTML;
 			$count++;
 		}
 	}
-  
+	echo '<sub class="show-type-total"><b>Showing '. $showing_type.':</b> ' . $start_post . ' to ' . $end_post . ' (total: ' . $tot_pages . ')</sub>';
+	echo '<div class="no-print">';
+	$pagination_zebra->render();
+	echo '</div>';
   ?>
 </body>
 </html>

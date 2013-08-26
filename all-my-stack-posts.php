@@ -1,8 +1,8 @@
 <?php
-/* Plugin Name: All Stack Posts
+/* Plugin Name: All My Stack Posts
  * Description: Get all Questions or Answers from a given user in a given Stack site. 
  * Plugin URI: http://meta.stackoverflow.com/q/194475/185667
- * Version:     0.2
+ * Version:     1.0
  * Author:      Rodolfo Buaiz
  * Author URI:  http://stackexchange.com/users/1211516?tab=accounts
  * License: GPLv2 or later
@@ -65,7 +65,7 @@ class B5F_SE_MyQA
 		$this->plugin_path   = plugin_dir_path( __FILE__ );
 		
 		include_once('includes/metabox.php');
-		$this->metabox = new B5F_SE_Metabox();
+		$this->metabox = new B5F_SE_Metabox( $this->plugin_path, $this->plugin_url );
 	}
 	
 	public function __construct() {}

@@ -64,8 +64,8 @@
      color:  #999;
      margin:  4px 0 0;
  }
- .stacktack-container .accepted-text  {
-     color:  #7b7;
+ .stacktack-container .accepted  {
+     color:  #3AB61A;
  }
  .stacktack-container .accepted-bg  {
      background-color: #B9ECB9;
@@ -92,7 +92,7 @@ font-size: 12pt;
     background-color: #F5F5F5;
     padding: 3px;
 }
-.pagination a {
+/*.pagination a {
     text-decoration: none;
 }
 .pagination a:hover {
@@ -101,7 +101,7 @@ font-size: 12pt;
 .pagination a.current-page {
     text-decoration: underline;
  
-}
+}*/
 .pagination {
     float: right;
     position: absolute;
@@ -144,7 +144,7 @@ font-size: 12pt;
 }
 
 .user-profile kbd {
-    color: #090;
+    color: #3AB61A;
     font-size: 12pt;
     font-weight: bold;
 }
@@ -153,3 +153,40 @@ font-size: 12pt;
     background-color: #D9EDF0;
     padding: 3px;
 }
+
+.show-type-total{
+    padding: 0 0 20px;
+    text-align: center;
+    display: block;
+}
+
+/* ATTRIBUTES FOR THE CONTAINER (THIS HOW WE CENTER EVERYTHING)
+----------------------------------------------------------------------------------------------------------------------*/
+.Zebra_Pagination                       { clear: both; width: 100%; overflow: hidden }
+.Zebra_Pagination ul                    { position: relative; left: 50%; list-style-type: none; margin: 0; padding: 0; float: left }
+.Zebra_Pagination li                    { position: relative; float: left; right: 50% }
+
+/* COMMON ATTRIBUTES FOR ALL THE LINKS
+----------------------------------------------------------------------------------------------------------------------*/
+.Zebra_Pagination a                     { padding: 4px; border: 1px solid #AAA; color: #333; text-decoration: none; margin: 0 2px; display: block; float: left; -webkit-border-radius: 6px; -moz-border-radius: 6px; border-radius: 6px }
+.Zebra_Pagination a:hover               { background-color: #DEDEDE; color: #222 }
+
+/* "NEXT PAGE" AND "PREVIOUS PAGE" LINKS
+----------------------------------------------------------------------------------------------------------------------*/
+.Zebra_Pagination a.navigation          { border: 1px solid transparent; overflow: hidden; background-repeat: no-repeat }
+.Zebra_Pagination a.previous            { background-image: url(../images/larrow.png); background-position: left center; padding-left: 25px }
+.Zebra_Pagination a.next                { background-image: url(../images/rarrow.png); background-position: right center; padding-right: 25px }
+.Zebra_Pagination a.disabled            { filter: alpha(opacity=20); -khtml-opacity: 0.2; -moz-opacity: 0.2; opacity: 0.2 }
+.Zebra_Pagination a.disabled:hover      { background-color: inherit; color: inherit }
+
+/* hack for transparent borders in IE6 */
+*html .Zebra_Pagination a.navigation    { border-color: #000001; filter: chroma(color=#000001) }
+
+/* CURRENT PAGE
+----------------------------------------------------------------------------------------------------------------------*/
+.Zebra_Pagination a.current,
+.Zebra_Pagination a.current:hover       { background: #0094D6; border-color: #0094D6; color: #FFF }
+
+/* THE "..." SEPARATOR
+----------------------------------------------------------------------------------------------------------------------*/
+.Zebra_Pagination span                  { color: #666; margin-right: 2px; display: block; float: left; padding: 8px 4px }

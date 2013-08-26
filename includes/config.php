@@ -12,4 +12,5 @@ Auth::$client_id = 1926;
 # Set the cache we will use
 global $disable_cache;
 if( !empty( $disable_cache ) )//!isset($_GET['no_api_cache'] ) )
-	API::SetCache(new FilestoreCache($plugin->plugin_path.'cache'));
+	API::SetCache( new FilestoreCache( $plugin->plugin_path.'cache' ) );
+
