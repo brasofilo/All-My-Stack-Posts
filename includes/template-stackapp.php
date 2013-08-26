@@ -288,7 +288,7 @@ HTML;
 	echo '<sub class="show-type-total"><b>Showing '. $showing_type.':</b> ' . $start_post . ' to ' . $end_post . ' (total: ' . $tot_pages . ')</sub>';
 	echo '<div class="no-print">';
 	$pagination_zebra->render();
-	echo '</div>';
+	echo '</div><br />';
 ?>
 </body>
 </html>
