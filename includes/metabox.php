@@ -20,7 +20,7 @@ class B5F_SE_Metabox
 	{
 		add_meta_box(
 			'b5f_se_metabox_section_id',
-			__( 'Stack Exchange - All my posts', 'wpse' ), 
+			__( "Stack Exchange - All user's posts", 'wpse' ), 
 			array( $this, 'inner_custom_box' ),
 			'page',
 			'side'

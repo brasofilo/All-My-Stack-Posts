@@ -2,7 +2,7 @@
 /**
  * Template Name: Stack Q&A's
  *
- * Used by the plugin All My Stack Posts
+ * Used by the plugin All Your Stack Posts
  * 
  */
 
