@@ -1,7 +1,7 @@
 All Your Stack Posts
 ====================
 
-WordPress plugin to Grab Questions or Answers from a given user from a given Stack site 
+WordPress plugin to Grab Questions or Answers from a given user in a given Stack site 
 and display them in a simple page ready to print (using your system capabilities).
 
 Inspired by the Meta question [How can I download my content from a beta site?](http://meta.stackoverflow.com/q/194475/185667).
