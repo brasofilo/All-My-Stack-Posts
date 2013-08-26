@@ -13,14 +13,15 @@ If the user's Answers are being viewed, the plugin will show 100 Questions per p
 
 If the user's Questions are being viewed, the plugin will show 100 Questions per page with all the Answers given.
 
+##Screenshots
+
 **Plugin Meta Box**:  
 > ![Plugin meta box](https://raw.github.com/brasofilo/All-My-Stack-Posts/master/includes/screenshot.png)
 
 **Showing Chuck Norris answers**:
 > ![Plugin template in action](https://raw.github.com/brasofilo/All-My-Stack-Posts/master/includes/screenshot2.png)
 
-Installation instructions
-===========
+##Installation instructions
 
 * After installed and activated, the plugin creates a template in the theme folder.
 
@@ -30,8 +31,7 @@ Installation instructions
 
 * In the plugin's custom meta box, select the Site, User ID, Posts per page (max. 100) and Enable caching.
 
-Acknowledgments
-===========
+##Acknowledgments
 
 * Copy plugin template to theme folder: [Page Template Example](https://github.com/tommcfarlin/page-template-example/), by Tom McFarlin.
 
@@ -44,19 +44,16 @@ Acknowledgments
 * Dropdown with icons: [Image dropdown](https://github.com/marghoobsuleman/ms-Dropdown), by Marghoob Suleman.
 
 
-Changelog
-===========
+##Changelog
 
 ### 1.0
 * Initial Public Release
 
-Credits
-===========
+##Credits
 
 This plugin is built and maintained by [Rodolfo Buaiz](http://brasofilo.com), aka brasofilo.
 
-License
-===========
+##License
 
 This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 
