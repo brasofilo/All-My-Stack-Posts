@@ -113,7 +113,6 @@ if( !$request->Fetch(false) )
 	$count = 1 + ( ($current_page-1) * $per_page );
 	$start_post = $count;
 	$end_post = ( $current_page == $pagination ) ? $tot_pages : intval($count+$per_page-1);
-	//echo '</div>';
 	
 	# Loop
 	if( 'answers' == $q_or_a )
@@ -221,8 +220,7 @@ HTML;
 					if( isset( $qanswer['owner']['profile_image'] ) )
 					{
 						$avatar_image = $qanswer['owner']['profile_image'] ;
-						//if( strpos( $qanswer['owner']['profile_image'], 'gravatar.com' ) === false )
-							$avatar_image = str_replace( 's=128', 's=32', $avatar_image );
+						$avatar_image = str_replace( 's=128', 's=32', $avatar_image );
 						$avatar = "<img src='$avatar_image' />";
 					}
 					else
@@ -254,6 +252,6 @@ HTML;
 	echo '<div class="no-print">';
 	$pagination_zebra->render();
 	echo '</div>';
-  ?>
+?>
 </body>
 </html>

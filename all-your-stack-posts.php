@@ -1,7 +1,7 @@
 <?php
-/* Plugin Name: All My Stack Posts
+/* Plugin Name: All Your Stack Posts
  * Description: Get all Questions or Answers from a given user in a given Stack site. 
- * Plugin URI: http://meta.stackoverflow.com/q/194475/185667
+ * Plugin URI: https://github.com/brasofilo/All-Your-Stack-Posts
  * Version:     1.0
  * Author:      Rodolfo Buaiz
  * Author URI:  http://stackexchange.com/users/1211516?tab=accounts
@@ -25,13 +25,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-
-/*
- * Readme
- * 
- * Losely based on http://github.com/tommcfarlin/page-template-plugin/ and https://github.com/nathan-osman/StackTack-WordPress-Plugin
- * Uses StackPHP http://stackapps.com/q/826/10590
- */
  
 add_action(
 	'plugins_loaded',

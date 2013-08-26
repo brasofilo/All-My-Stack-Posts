@@ -1,4 +1,4 @@
-All-Your-Stack-Posts
+All Your Stack Posts
 ====================
 
 WordPress plugin to Grab Questions or Answers from a given user from a given Stack site 
