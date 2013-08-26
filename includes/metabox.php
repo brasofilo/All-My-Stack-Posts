@@ -73,6 +73,27 @@ class B5F_SE_Metabox
 		echo '</select></p>';
 		#
 		
+		# Sorting
+		$se_sort_orders = array(
+			'asc'       => __('Ascending', 'wpse'),
+			'desc'     => __('Descending', 'wpse')
+		);
+		$se_sort_order_saved = get_post_meta( $post->ID, 'se_sort_order', true);
+		if( !$se_sort_order_saved )
+			$se_sort_order_saved = 'asc';
+		echo '<p><label for="se_sort_order" class="mbox-label"><strong>Sorting</strong></label> <select name="se_sort_order" id="se_sort_order">';
+		foreach ( $se_sort_orders as $key => $label ) 
+		{
+			printf(
+				'<option value="%s" %s> %s</option>',
+				esc_attr($key),
+				selected( $se_sort_order_saved, $key, false),
+				esc_html($label)
+			);
+		}
+		echo '</select></p>';
+		#
+		
 		# User ID
 		$se_user_id_saved = get_post_meta( $post->ID, 'se_user_id', true);
 		if( !$se_user_id_saved )
@@ -115,6 +136,13 @@ class B5F_SE_Metabox
 						$post_id, 
 						'se_post_type', 
 						$_POST['se_post_type'] 
+				);
+		  
+		  if ( isset($_POST['se_sort_order']) )
+				update_post_meta( 
+						$post_id, 
+						'se_sort_order', 
+						$_POST['se_sort_order'] 
 				);
 		  
 		  if ( isset($_POST['se_user_id']) && $_POST['se_user_id'] != "" )
