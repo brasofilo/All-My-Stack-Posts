@@ -13,10 +13,10 @@ If the user's Answers are being viewed, the plugin will show 100 Questions per p
 
 If the user's Questions are being viewed, the plugin will show 100 Questions per page with all the Answers given.
 
-Plugin Meta Box:
+**Plugin Meta Box**:  
 ![Plugin meta box](https://raw.github.com/brasofilo/All-My-Stack-Posts/master/includes/screenshot.png)
 
-Showing Chuck Norris answers:
+**Showing Chuck Norris answers**:
 ![Plugin template in action](https://raw.github.com/brasofilo/All-My-Stack-Posts/master/includes/screenshot2.png)
 
 Installation instructions
