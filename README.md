@@ -52,6 +52,7 @@ If the user's Questions are being viewed, the plugin will show 100 Questions per
 ### 1.0
 * Initial Public Release
 
+~Current Version:1.1~
 
 ##Credits
 
