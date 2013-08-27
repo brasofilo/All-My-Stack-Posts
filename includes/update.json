@@ -9,8 +9,8 @@
     "tested" : "3.6",
     "sections" : {
         "description" : "Get all Questions or Answers from a given user in a given Stack site.",
-        "changelog" : "<p><ul><li>1.2 - Testing another update solution.</li><li>1.1 - Added GitHub updater capabilities</li><li>1.0 - Initial Public Release</li></ul>"
+        "changelog" : "<p><ul><li><strong>1.2</strong> - Testing another update solution.</li><li>1.1 - Added GitHub updater capabilities</li><li>1.0 - Initial Public Release</li></ul>"
     },
-    "upgrade_notice" : "<strong>Testing new plugin update from GitHub method.</strong>",
-    "last_updated" : "08/27/2013"
+    "upgrade_notice" : "Testing new plugin update from GitHub method.",
+    "last_updated" : "2013-08-27"
 }
