@@ -77,7 +77,7 @@ class B5F_SE_MyQA
 		$config = array(
 			'slug' => plugin_basename( __FILE__ ),
 			'proper_folder_name' => 'all-your-stack-posts',
-			'api_url' => 'https://github.com/brasofilo/All-Your-Stack-Posts',
+			'api_url' => 'https://api.github.com/repos/brasofilo/All-Your-Stack-Posts',
 			'raw_url' => 'https://raw.github.com/brasofilo/All-Your-Stack-Posts/master',
 			'github_url' => 'https://github.com/brasofilo/All-Your-Stack-Posts',
 			'zip_url' => 'https://github.com/brasofilo/All-Your-Stack-Posts/archive/master.zip',
