@@ -60,11 +60,12 @@ class B5F_SE_MyQA
 		include_once('includes/metabox.php');
 		$this->metabox = new B5F_SE_Metabox( $this->plugin_path, $this->plugin_url );
 		
-		/*require $this->plugin_path . 'includes/plugin-update-checker.php';
-		$MyUpdateChecker = PucFactory::buildUpdateChecker(
-			'http://buaiz.eu/wp-content/custom/wp-update-server/?action=get_metadata&slug=all-your-stack-posts', 
-			__FILE__
-		);*/
+		require 'includes/plugin-updates/plugin-update-checker.php';
+		$ExampleUpdateChecker = new PluginUpdateChecker(
+	'https://raw.github.com/brasofilo/All-Your-Stack-Posts/master/includes/update.json',
+	__FILE__,
+	'All-Your-Stack-Posts-master'
+);
 
 	}
 	

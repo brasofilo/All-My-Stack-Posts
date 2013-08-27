@@ -47,7 +47,7 @@ If the user's Questions are being viewed, the plugin will show 100 Questions per
 ##Changelog
 
 ### 1.2
-* Removed updater, not working :( The other option is to use a private site, but being a public plugin I don't think it's a good idea.
+* Testing [another update solution](https://github.com/YahnisElsts/plugin-update-checker).
 
 ### 1.1
 * Added [GitHub updater](https://github.com/jkudish/WordPress-GitHub-Plugin-Updater) capabilities
