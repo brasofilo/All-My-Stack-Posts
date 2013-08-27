@@ -11,6 +11,6 @@
         "description" : "Get all Questions or Answers from a given user in a given Stack site.",
         "changelog" : "<p>* 1.2 - Testing another update solution.</p><p>* 1.1 - Added GitHub updater capabilities</p><p>* 1.0 - Initial Public Release</p>"
     },
-    "upgrade_notice" : "Testing new plugin update from GitHub method.",
+    "upgrade_notice" : "<h3>Testing new plugin update from GitHub method.</h3>",
     "last_updated" : "27/08/2013"
 }
