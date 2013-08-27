@@ -2,7 +2,7 @@
 /* Plugin Name: All Your Stack Posts
  * Description: Get all Questions or Answers from a given user in a given Stack site. 
  * Plugin URI: https://github.com/brasofilo/All-Your-Stack-Posts
- * Version:     1.0
+ * Version:     1.1
  * Author:      Rodolfo Buaiz
  * Author URI:  http://stackexchange.com/users/1211516?tab=accounts
  * License: GPLv2 or later
@@ -59,10 +59,38 @@ class B5F_SE_MyQA
 		
 		include_once('includes/metabox.php');
 		$this->metabox = new B5F_SE_Metabox( $this->plugin_path, $this->plugin_url );
+		
+		//add_action( 'init', array( $this, 'github_updater' ) );
 	}
 	
 	public function __construct() {}
 	
+	public function github_updater()
+	{
+		include_once 'includes/updater.php';
+
+		define( 'WP_GITHUB_FORCE_UPDATE', true );
+
+		if ( !is_admin() )
+			return;
+
+		$config = array(
+			'slug' => plugin_basename( __FILE__ ),
+			'proper_folder_name' => 'all-your-stack-posts',
+			'api_url' => 'https://api.github.com/brasofilo/All-Your-Stack-Posts',
+			'raw_url' => 'https://raw.github.com/brasofilo/All-Your-Stack-Posts/master',
+			'github_url' => 'https://github.com/brasofilo/All-Your-Stack-Posts',
+			'zip_url' => 'https://github.com/brasofilo/All-Your-Stack-Posts/archive/master.zip',
+			'sslverify' => true,
+			'requires' => '3.0',
+			'tested' => '3.3',
+			'readme' => 'README.md',
+			'access_token' => 'adb4be07dbaf1bd808f1e62a9681020dd381c0e1',
+		);
+
+		new WP_GitHub_Updater( $config );
+
+	}
 	
 	public static function register_project_template()
 	{ 
@@ -140,3 +168,4 @@ class B5F_SE_MyQA
 
 	} 	
 }
+
