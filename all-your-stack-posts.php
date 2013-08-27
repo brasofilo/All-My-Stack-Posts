@@ -1,7 +1,7 @@
 <?php
 /* Plugin Name: All Your Stack Posts
  * Description: Get all Questions or Answers from a given user in a given Stack site. 
- * Plugin URI: https://github.com/brasofilo/All-Your-Stack-Posts
+ * Plugin URI: http://stackapps.com/q/4306/10590
  * Version:     1.2
  * Author:      Rodolfo Buaiz
  * Author URI:  http://stackexchange.com/users/1211516?tab=accounts
