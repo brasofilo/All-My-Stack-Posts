@@ -60,7 +60,7 @@ class B5F_SE_MyQA
 		include_once('includes/metabox.php');
 		$this->metabox = new B5F_SE_Metabox( $this->plugin_path, $this->plugin_url );
 		
-		//add_action( 'init', array( $this, 'github_updater' ) );
+		add_action( 'init', array( $this, 'github_updater' ) );
 	}
 	
 	public function __construct() {}
@@ -77,13 +77,13 @@ class B5F_SE_MyQA
 		$config = array(
 			'slug' => plugin_basename( __FILE__ ),
 			'proper_folder_name' => 'all-your-stack-posts',
-			'api_url' => 'https://api.github.com/brasofilo/All-Your-Stack-Posts',
+			'api_url' => 'https://github.com/brasofilo/All-Your-Stack-Posts',
 			'raw_url' => 'https://raw.github.com/brasofilo/All-Your-Stack-Posts/master',
 			'github_url' => 'https://github.com/brasofilo/All-Your-Stack-Posts',
 			'zip_url' => 'https://github.com/brasofilo/All-Your-Stack-Posts/archive/master.zip',
 			'sslverify' => true,
 			'requires' => '3.0',
-			'tested' => '3.3',
+			'tested' => '3.6',
 			'readme' => 'README.md',
 			'access_token' => 'adb4be07dbaf1bd808f1e62a9681020dd381c0e1',
 		);

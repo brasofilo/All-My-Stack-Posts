@@ -47,12 +47,11 @@ If the user's Questions are being viewed, the plugin will show 100 Questions per
 ##Changelog
 
 ### 1.1
-* Adding remote update capabilities
+* Added [GitHub updater](https://github.com/jkudish/WordPress-GitHub-Plugin-Updater) capabilities
 
 ### 1.0
 * Initial Public Release
 
-~Current Version:1.1~
 
 ##Credits
 
