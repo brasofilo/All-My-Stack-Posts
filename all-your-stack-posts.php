@@ -2,7 +2,7 @@
 /* Plugin Name: All Your Stack Posts
  * Description: Get all Questions or Answers from a given user in a given Stack site. 
  * Plugin URI: http://stackapps.com/q/4306/10590
- * Version:     1.2
+ * Version:     1.3
  * Author:      Rodolfo Buaiz
  * Author URI:  http://stackexchange.com/users/1211516?tab=accounts
  * License: GPLv2 or later
@@ -44,7 +44,8 @@ class B5F_SE_MyQA
 	protected static $instance = NULL;
 	public $plugin_url = NULL;
 	public $plugin_path = NULL;
-	public $metabox;
+	public $plugin_slug = NULL;
+	public $frontend;
 	
 	public static function get_instance()
 	{
@@ -56,20 +57,38 @@ class B5F_SE_MyQA
 	{
 		$this->plugin_url    = plugins_url( '/', __FILE__ );
 		$this->plugin_path   = plugin_dir_path( __FILE__ );
+		$this->plugin_slug   = plugin_basename(__FILE__);
 		
-		include_once('includes/metabox.php');
-		$this->metabox = new B5F_SE_Metabox( $this->plugin_path, $this->plugin_url );
+		include_once('includes/class-metabox.php');
+		new B5F_SE_Metabox( $this->plugin_path, $this->plugin_url );
+		
+		if( !is_admin() )
+		{
+			include_once('includes/class-frontend.php');
+			$this->frontend = new B5F_SE_Frontend( $this->plugin_path, $this->plugin_url );
+		}
 		
 		require 'includes/plugin-updates/plugin-update-checker.php';
 		$ExampleUpdateChecker = new PluginUpdateChecker(
-	'https://raw.github.com/brasofilo/All-Your-Stack-Posts/master/includes/update.json',
-	__FILE__,
-	'All-Your-Stack-Posts-master'
-);
-
+			'https://raw.github.com/brasofilo/All-Your-Stack-Posts/master/includes/update.json',
+			__FILE__,
+			'All-Your-Stack-Posts-master'
+		);
+		
+		add_filter( 'upgrader_post_install', array( $this, 'refresh_template' ), 10, 3 );
 	}
 	
 	public function __construct() {}
+	
+	public function refresh_template(  $true, $hook_extra, $result )
+	{
+		if( $this->plugin_slug == $hook_extra['plugin'] )
+		{
+			self::deregister_project_template();
+			self::register_project_template();
+		}
+		return $true; 
+	}
 	
 	
 	public static function register_project_template()

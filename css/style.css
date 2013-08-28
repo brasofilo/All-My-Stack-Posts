@@ -1,88 +1,100 @@
 
 .stacktack-container  {
-     background-color:  white;
-     border-radius:  8px;
-     box-shadow:  0 0 10px #777;
-     font-family:  arial,  helvetica,  sans;
-     font-size:  12pt;
-     margin:  20px 10px;
-     padding:  30px;
- }
- .stacktack-container a  {
-     color:  #58c;
-     text-decoration:  none;
- }
- .stacktack-container a:hover  {
-     color:  #79e;
- }
- .stacktack-container .branding  {
-     float:  right;
-     font-size:  42pt;
-     font-weight:  bold;
-     font-style:  italic;
-     color:  #DAE4E1;
-     margin-right: 10px;
- }
- .stacktack-container .branding span  {
-     color:  #ccc;
- }
- .stacktack-container .heading  {
-     display:  block;
-     font-size:  18pt;
-     font-weight:  bold;
- }
- .stacktack-container .hr  {
-     background-color:  #ccc;
-     height:  1px;
-     margin:  6px 0;
- }
- .stacktack-container p  {
-     margin:  10px 0;
- }
- .stacktack-container pre  {
-     background-color:  #e7e7e7;
-     overflow-x:  auto;
-     padding:  4px 10px;
- }
- .stacktack-container p.tip  {
-     color:  #999;
-     padding:  0 20px;
- }
- .stacktack-container .tags  {
-     margin:  6px 0px;
-     text-align:  right;
- }
- .stacktack-container .tags span  {
-     background-color:  #e7e7ff;
-     border-bottom:  1px solid #bbf;
-     border-right:  1px solid #bbf;
-     display:  inline-block;
-     margin-right:  6px;
-     padding:  2px 6px;
- }
- .stacktack-container .answer-count  {
-     color:  #999;
-     margin:  4px 0 0;
- }
- .stacktack-container .accepted  {
-     color:  #3AB61A;
- }
- .stacktack-container .accepted-bg  {
-     background-color: #B9ECB9;
- }
- .stacktack-container .user-link  {
-     color:  #999;
-     display:  inline-block;
-     font-size:  8pt;
-     margin-left:  8px;
- }
+    background-color:  white;
+    border-radius:  8px;
+    box-shadow:  0 0 10px #777;
+    font-family:  arial,  helvetica,  sans;
+    font-size:  12pt;
+    margin:  20px 10px;
+    padding:  30px;
+}
+.stacktack-container a  {
+    color:  #58c;
+    text-decoration:  none;
+}
+.stacktack-container a:hover  {
+    color:  #79e;
+}
+.stacktack-container .branding  {
+    float:  right;
+    font-size:  42pt;
+    font-weight:  bold;
+    font-style:  italic;
+    color:  #DAE4E1;
+    margin-right: 10px;
+}
+.stacktack-container .branding span  {
+    color:  #ccc;
+}
+.stacktack-container .heading  {
+    display:  block;
+    font-size:  18pt;
+    font-weight:  bold;
+}
+.stacktack-container .hr  {
+    background-color:  #ccc;
+    height:  1px;
+    margin:  6px 0;
+}
+.stacktack-container p  {
+    margin:  10px 0;
+}
+.stacktack-container pre  {
+    background-color:  #e7e7e7;
+    overflow-x:  auto;
+    padding:  4px 10px;
+}
+.stacktack-container p.tip  {
+    color:  #999;
+    padding:  0 20px;
+}
+.stacktack-container .tags  {
+    margin:  6px 0px;
+    text-align:  right;
+}
+.stacktack-container .tags span  {
+    background-color:  #e7e7ff;
+    border-bottom:  1px solid #bbf;
+    border-right:  1px solid #bbf;
+    display:  inline-block;
+    margin-right:  6px;
+    padding:  2px 6px;
+}
+.stacktack-container .answer-count  {
+    color:  #999;
+    margin:  4px 0 0;
+}
+.stacktack-container .accepted  {
+    color:  #3AB61A;
+}
+.stacktack-container .accepted-bg  {
+    background-color:#B9ECB9; /*  #B9ECB9; 75845C*/
+    color: #fff
+}
+.stacktack-container .white-count {
+    color:#fff;
+}
+.stacktack-container .white-count:hover {
+    color:#FFEDFE
+}
+.stacktack-container .user-link {
+    color:  #999;
+    display:  inline-block;
+    font-size:  8pt;
+    margin-left:  8px;
+}
+.stacktack-container .user-link.ul-answer  {
+    margin-left: 8px;
+    vertical-align: bottom;
+    font-weight: normal;
+}
 .heading.answer-count {
-font-size: 12pt;
+    font-size: 12pt;
 }
 .question-body {
-	background-color:#F1F1F1;
-	padding:10px;
-	margin-top: 0px;
+    background-color:#F1F1F1;
+    padding:10px;
+    margin-top: 0px;
 }
 .answer-body {
     padding: 20px 0 0 3em;
@@ -95,6 +107,18 @@ font-size: 12pt;
 
 .se-avatar {
     max-width: 32px;
+    padding: 4px 0 0 3px;
+}
+
+.vote-accepted-on {
+    background-position: 0px -460px;
+    background-image: url('../images/sprites.png');
+    background-repeat: no-repeat;
+    overflow: hidden;
+    width: 39px;
+    height: 40px;
+    display: block;
+    float: right
 }
 /*.pagination a {
     text-decoration: none;
@@ -163,31 +187,53 @@ font-size: 12pt;
     text-align: center;
     display: block;
 }
-
+#user-name {
+    font-size: 1.3em;
+    font-weight: bold;
+}
+#tag-line {
+    margin-top: 4px;
+}
+.badges {
+    float: left;
+    margin: 4px 12px 0 0;
+}
 .badge1 {
-	background-position: -40px -1034px;
+    background-position: -40px -1034px;
 }
 
 .badge1, .badge2, .badge3 {
-	vertical-align: text-bottom;
-	margin: 0 1px 1px 3px;
-	display: inline-block;
-	width: 6px;
-	height: 11px;
-	overflow: hidden;
-	line-height: inherit;
-	background-image: url('../images/sprites.png');
-	background-repeat: no-repeat;
+    vertical-align: text-bottom;
+    margin: 0 1px 1px 3px;
+    display: inline-block;
+    width: 6px;
+    height: 11px;
+    overflow: hidden;
+    line-height: inherit;
+    background-image: url('../images/sprites.png');
+    background-repeat: no-repeat;
 }
 
 .badge2 {
-background-position: -20px -1034px;
+    background-position: -20px -1034px;
 }
 
 .badge3 {
-background-position: 0px -1034px;
+    background-position: 0px -1034px;
 }
 
+.fleft {
+    float:left;
+}
+.score-box {
+    background-color: #E7E7E7;
+    padding: 5px 15px;
+    font-size: 2em;
+    text-align: center;
+    width: 30px;
+    float: lef;
+    color: #818181
+}
 /* ATTRIBUTES FOR THE CONTAINER (THIS HOW WE CENTER EVERYTHING)
 ----------------------------------------------------------------------------------------------------------------------*/
 .Zebra_Pagination                       { clear: both; width: 100%; overflow: hidden }

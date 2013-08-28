@@ -46,6 +46,11 @@ If the user's Questions are being viewed, the plugin will show 100 Questions per
 
 ##Changelog
 
+### 1.3
+* Plugin updater working ok.
+* New feature: short links.
+* New feature: ability to add referrer to the short links.
+
 ### 1.2
 * Testing [another update solution](https://github.com/YahnisElsts/plugin-update-checker).
 

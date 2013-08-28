@@ -4,6 +4,7 @@ class B5F_SE_Metabox
 {
 	private $plugin_path;
 	private $plugin_url;
+	
 	public function __construct( $path, $url ) 
 	{
 		$this->plugin_path = $path;
@@ -71,7 +72,6 @@ class B5F_SE_Metabox
 			);
 		}
 		echo '</select></p>';
-		#
 		
 		# Sorting
 		$se_sort_orders = array(
@@ -92,19 +92,16 @@ class B5F_SE_Metabox
 			);
 		}
 		echo '</select></p>';
-		#
 		
 		# User ID
 		$se_user_id_saved = get_post_meta( $post->ID, 'se_user_id', true);
 		if( !$se_user_id_saved )
 			$se_user_id_saved = '';
 		echo "<p><label for='se_user_id' class='mbox-label'><strong>User ID</strong></label> <input type='text' size='6' name='se_user_id' id='se_user_id' value='" . esc_attr( $se_user_id_saved ) . "' /></p>";
-		#
 		
 		# Posts per page
 		$se_per_page = get_post_meta( $post->ID, 'se_per_page', true);
 		echo "<p><label for='se_per_page' class='mbox-label'><strong>Posts per page</strong></label><input type='text' size='6' name='se_per_page' id='se_per_page' value='" . esc_attr( $se_per_page ) . "' /></p>";
-		#
 		
 		# Cache
 		$se_cached = get_post_meta( $post->ID, 'se_cached', true);
@@ -112,7 +109,18 @@ class B5F_SE_Metabox
 			'<p><label for="se_cached" class="mbox-label"><strong>Cache results</strong></label> <input name="se_cached" id="se_cached" type="checkbox" %s />',
 			checked( $se_cached, 'on', false)
 		);
-	}
+
+		# Referrer ID
+		$se_referrer_id_saved = get_post_meta( $post->ID, 'se_referrer_id', true);
+		if( !$se_referrer_id_saved )
+			$se_referrer_id_saved = '';
+		printf(
+				"<hr /><p><label for='se_referrer_id' class=''><strong>%s</strong><br />%s</label><br /> <input type='text' size='6' name='se_referrer_id' id='se_referrer_id' value='%s' /></p>",
+				__( 'Referral ID' ),
+				__( "enter a <em>user ID</em> to use as <a href='http://blog.stackoverflow.com/2010/09/announcer-booster-and-publicist-badges/' target='_blank'>referral link</a>,<br />leave empty for no referrer:" ),
+				esc_attr( $se_referrer_id_saved )
+		);
+}
 
 	/* When the post is saved, saves our custom data */
 	public function save_postdata( $post_id ) 
@@ -151,6 +159,15 @@ class B5F_SE_Metabox
 						'se_user_id', 
 						intval( stripslashes( strip_tags( $_POST['se_user_id'] ) ) ) 
 				);
+		  if ( isset($_POST['se_referrer_id']) && $_POST['se_referrer_id'] != "" )
+				update_post_meta( 
+						$post_id, 
+						'se_referrer_id', 
+						intval( stripslashes( strip_tags( $_POST['se_referrer_id'] ) ) ) 
+				);
+		  else 
+			  delete_post_meta( $post_id, 'se_referrer_id' );
+		  
 		  if ( isset($_POST['se_cached']) && $_POST['se_cached'] != "" )
 				update_post_meta( 
 						$post_id, 
