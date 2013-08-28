@@ -48,7 +48,7 @@ If the user's Questions are being viewed, the plugin will show 100 Questions per
 ##Changelog
 
 ### 1.3
-* Plugin updater working ok.
+* Plugin updater working ok. Zip file pulled from GitHub repo.
 * New feature: short links.
 * New feature: ability to add referrer to the short links.
 * Improvement: template file in theme folder now updated automatically on plugin update.
