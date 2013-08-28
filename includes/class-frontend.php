@@ -26,13 +26,13 @@ class B5F_SE_Frontend
 	
 	public function get_profile( $user, $showing_type, $site, $total )
 	{
-		$reputation = number_format($user['reputation'], 0, ',', '.');
+		$reputation = $this->count_format($user['reputation']);
 		$total_posts = number_format($total, 0, ',', '.');
 		$badges = $this->get_badges( $user );
 		$html = <<<HTML
 <div class='user-profile'>
 	<div class='gravatar'>
-		<img src='{$user['profile_image']}&s=64' />
+		<img src='{$user['profile_image']}&s=78' />
 	</div>
 	<div id="user-name">{$user['display_name']}</div>
 	<div id="user-rep">$badges<kbd>$reputation</kbd> reputation</div>
@@ -244,4 +244,17 @@ HTML;
 		return $score;
 	}
 	
+	function count_format($n, $point=',', $sep='.') {
+		if ($n < 0) 
+			return 0;
+
+		if ($n < 10000)
+			return number_format($n, 0, $point, $sep);
+
+		$d = $n < 1000000 ? 1000 : 1000000;
+
+		$f = round($n / $d, 1);
+
+		return number_format($f, $f - intval($f) ? 1 : 0, $sep, $point) . ($d == 1000 ? 'k' : 'M');
+	}
 }
