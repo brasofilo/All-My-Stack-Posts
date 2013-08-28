@@ -3,7 +3,7 @@
  * Template Name: Stack Q&A's
  *
  * Used by the plugin All Your Stack Posts
- * 
+ * Version 1.3
  */
 
 # Get plugin utilities and properties

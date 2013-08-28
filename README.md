@@ -43,6 +43,7 @@ If the user's Questions are being viewed, the plugin will show 100 Questions per
 
 * Dropdown with icons: [Image dropdown](https://github.com/marghoobsuleman/ms-Dropdown), by Marghoob Suleman.
 
+* [Plugin update checker](https://github.com/YahnisElsts/plugin-update-checker), by Yahnis Elsts.
 
 ##Changelog
 
@@ -50,6 +51,7 @@ If the user's Questions are being viewed, the plugin will show 100 Questions per
 * Plugin updater working ok.
 * New feature: short links.
 * New feature: ability to add referrer to the short links.
+* Improvement: template file in theme folder now updated automatically on plugin update.
 
 ### 1.2
 * Testing [another update solution](https://github.com/YahnisElsts/plugin-update-checker).
