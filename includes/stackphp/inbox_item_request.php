@@ -3,6 +3,7 @@
 require_once 'paged_request.php';
 
 /// A request for items in a user's inbox.
+if( !class_exists( 'InboxItemRequest' ) ):
 class InboxItemRequest extends PagedRequest
 {
     /// Constructor for an inbox item request.
@@ -45,4 +46,4 @@ class InboxItemRequest extends PagedRequest
     }
 }
 
-?>
+endif;

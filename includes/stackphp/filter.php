@@ -16,6 +16,7 @@ require_once 'url.php';
   *
   * You can change the default filter by setting API::$filter.
   */
+if( !class_exists( 'Filter' ) ):
 class Filter
 {
     //====================
@@ -197,4 +198,4 @@ class Filter
     }
 }
 
-?>
+endif;

@@ -1,6 +1,7 @@
 <?php
 
 /// Error codes for the API route /error.
+if( !class_exists( 'ErrorCode' ) ):
 class ErrorCode
 {
     /// The server has not found anything matching the Request-URI.
@@ -35,4 +36,4 @@ class ErrorCode
     const Offline = 9999;
 }
 
-?>
+endif;

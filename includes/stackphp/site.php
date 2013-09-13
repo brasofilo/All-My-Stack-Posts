@@ -18,6 +18,7 @@ require_once 'user_request.php';
   * item containing site data or a string containing part of
   * the site's domain name.
   */
+if( !class_exists( 'Site' ) ):
 class Site implements ArrayAccess
 {
     // Information about the site
@@ -362,4 +363,4 @@ class Site implements ArrayAccess
     }
 }
 
-?>
+endif;

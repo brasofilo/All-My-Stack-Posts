@@ -21,6 +21,7 @@ require_once 'filter.php';
   * - any additional parameters needed
   * - query string values (stored as an array of key/value pairs)
   */
+if( !class_exists( 'URL' ) ):
 class URL
 {
     //======================
@@ -299,4 +300,4 @@ class URL
     }
 }
 
-?>
+endif;

@@ -15,6 +15,7 @@ EOD
 );
 
 /// Provides a means to use an SQL database for caching purposes.
+if( !class_exists( 'SQLCache' ) ):
 class SQLCache implements CacheBase
 {
     // Constants for different supported database types
@@ -154,4 +155,4 @@ class SQLCache implements CacheBase
     }
 }
 
-?>
+endif;

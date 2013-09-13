@@ -5,6 +5,7 @@
   * Note that some requests will disable the cache if the response contains authenticated
   * data. This is done as a security precaution to prevent information leakage.
   */
+if( !interface_exists( 'CacheBase' ) ):
 interface CacheBase
 {
     /// Retrieves the data for the given URL from the cache.
@@ -29,4 +30,4 @@ interface CacheBase
     public function Cleanup();
 }
 
-?>
+endif;

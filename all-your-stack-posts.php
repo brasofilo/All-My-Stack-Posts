@@ -2,7 +2,7 @@
 /* Plugin Name: All Your Stack Posts
  * Description: Get all Questions or Answers from a given user in a given Stack site. 
  * Plugin URI: http://stackapps.com/q/4306/10590
- * Version:     1.3
+ * Version:     1.4
  * Author:      Rodolfo Buaiz
  * Author URI:  http://stackexchange.com/users/1211516?tab=accounts
  * License: GPLv2 or later
@@ -68,21 +68,44 @@ class B5F_SE_MyQA
 			$this->frontend = new B5F_SE_Frontend( $this->plugin_path, $this->plugin_url );
 		}
 		
-		require 'includes/plugin-updates/plugin-update-checker.php';
-		$ExampleUpdateChecker = new PluginUpdateChecker(
+		include_once 'includes/plugin-updates/plugin-update-checker.php';
+		$updateChecker = new PluginUpdateChecker(
 			'https://raw.github.com/brasofilo/All-Your-Stack-Posts/master/includes/update.json',
 			__FILE__,
 			'All-Your-Stack-Posts-master'
 		);
 		
 		add_filter( 'upgrader_post_install', array( $this, 'refresh_template' ), 10, 3 );
+		add_filter( 'upgrader_source_selection', array( $this, 'rename_github_zip' ), 1, 3);
 	}
+	
 	
 	public function __construct() {}
 	
+	/**
+	 * Removes the prefix "-master" when updating from GitHub zip files
+	 * 
+	 * See: https://github.com/YahnisElsts/plugin-update-checker/issues/1
+	 * 
+	 * @param string $source
+	 * @param string $remote_source
+	 * @param object $thiz
+	 * @return string
+	 */
+	public function rename_github_zip( $source, $remote_source, $thiz )
+	{
+		if(  strpos( $source, 'All-Your-Stack-Posts') === false )
+			return $source;
+
+		$path_parts = pathinfo($source);
+		$newsource = trailingslashit($path_parts['dirname']). trailingslashit('All-Your-Stack-Posts');
+		rename($source, $newsource);
+		return $newsource;
+	}
+
 	public function refresh_template(  $true, $hook_extra, $result )
 	{
-		if( $this->plugin_slug == $hook_extra['plugin'] )
+		if( isset( $hook_extra['plugin'] ) && $this->plugin_slug == $hook_extra['plugin'] )
 		{
 			self::deregister_project_template();
 			self::register_project_template();
@@ -91,6 +114,10 @@ class B5F_SE_MyQA
 	}
 	
 	
+	/**
+	 * Call copy template function on Plugin Activation
+	 * 
+	 */
 	public static function register_project_template()
 	{ 
 		// Get source and destination for copying from the plugin to the theme directory
@@ -101,6 +128,14 @@ class B5F_SE_MyQA
 		self::copy_page_template( $source, $destination );
 	}
 	
+	/**
+	 * Remove the plugin template from theme directory
+	 * 
+	 * Returns TRUE if the file not exists, or if the removal is successful
+	 * Returns FALSE if the file exists, but was not removed
+	 * 
+	 * @return boolean 
+	 */
 	public static function deregister_project_template()
 	{
 		// Get the path to the theme
@@ -108,21 +143,29 @@ class B5F_SE_MyQA
 		
 		// If the template file is in the theme path, delete it.
 		if( file_exists( $template_path ) )
-			unlink( $template_path );
+			return unlink( $template_path );
+
+		return true;
 	}
 	
 	/**
+	 * The destination to the plugin directory relative to the currently active theme
+	 * 
 	 * From page-template-plugin
-	 * @return string The destination to the plugin directory relative to the currently active theme
+	 * 
+	 * @return string 
 	 */
 	private static function get_template_destination() 
 	{
-		return get_template_directory() . '/template-stackapp.php';
+		return get_stylesheet_directory() . '/template-stackapp.php';
 	} 
 
 	/**
+	 * The path to the template file relative to the plugin.
+	 * 
 	 * From page-template-plugin
-	 * @return string The path to the template file relative to the plugin.
+	 * 
+	 * @return string 
 	 */
 	private static function get_template_source() 
 	{
@@ -130,9 +173,12 @@ class B5F_SE_MyQA
 	} 
 	
 	/**
+	 * Does the actual copy from plugin to template directory
+	 * 
 	 * From page-template-plugin
-	 * @param type $source
-	 * @param type $destination
+	 *
+	 * @param string $source
+	 * @param string $destination
 	 */
 	private static function copy_page_template( $source, $destination )	
 	{
@@ -145,7 +191,8 @@ class B5F_SE_MyQA
 			// Read the source file starting from the beginning of the file
 			if( null != ( $handle = @fopen( $source, 'r' ) ) ) 
 			{
-				// Read the contents of the file into a string. Read up to the length of the source file
+				// Read the contents of the file into a string. 
+				// Read up to the length of the source file
 				if( null != ( $content = fread( $handle, filesize( $source ) ) ) ) 
 				{
 					// Relinquish the resource
@@ -168,3 +215,17 @@ class B5F_SE_MyQA
 	} 	
 }
 
+
+/* DOES NOT WORK 
+add_filter('upgrader_post_install', function( $bool, $hook_extra, $result )
+{
+	if( strpos( $result['destination_name'], 'All-Your-Stack-Posts' ) === false )
+			return $bool;
+	
+	$result['destination'] == str_replace( '-master', '', $result['destination'] );
+	$result['destination_name'] == str_replace( '-master', '', $result['destination_name'] );
+	$result['remote_destination'] == str_replace( '-master', '', $result['remote_destination'] );
+	return new WP_Error( $result );
+}, 10, 3 );
+
+*/

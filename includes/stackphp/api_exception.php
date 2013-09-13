@@ -6,6 +6,7 @@
   * an exception occurs. Additional information, such as URL and API error
   * code / message are able to be captured and stored with the exception.
   */
+if( !class_exists( 'APIException' ) ):
 class APIException extends Exception
 {
     // Additional details regarding the exception such as the
@@ -77,4 +78,4 @@ class APIException extends Exception
     }
 }
 
-?>
+endif;

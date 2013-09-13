@@ -51,24 +51,26 @@ $filter = new Filter();
 # Paged results
 $current_page = isset($_GET['se_paged']) ? $_GET['se_paged'] : 1;
 
-# Query user Questions
+# QUERY USER QUESTIONS
+# # http://api.stackexchange.com/docs/questions-on-users#order=desc&sort=activity&ids=73070&filter=!FrfIAirj9mEiCDnga4.6rwox2c&site=stackoverflow&run=true
 if( 'questions' == $q_or_a )
 {
 	$showing_type = 'Questions';
 	$filter->SetIncludeItems(array('answer.title', 'answer.link', 'answer.body'));
 	if( 'asc' == $sort_order )
-		$request = $user->Questions()->SortByCreation()->Ascending()->Filter('!gfG0_rPCgOGeBliTwxTD1pl6ZzcYbMMx2tk')->Exec()->Page($current_page)->Pagesize($per_page);
+		$request = $user->Questions()->SortByCreation()->Ascending()->Filter('!FrfIAirj9mEiCDnga4.6rwox2c')->Exec()->Page($current_page)->Pagesize($per_page);
 	else
-		$request = $user->Questions()->SortByCreation()->Descending()->Filter('!gfG0_rPCgOGeBliTwxTD1pl6ZzcYbMMx2tk')->Exec()->Page($current_page)->Pagesize($per_page);
+		$request = $user->Questions()->SortByCreation()->Descending()->Filter('!FrfIAirj9mEiCDnga4.6rwox2c')->Exec()->Page($current_page)->Pagesize($per_page);
 }
-# Query user Answers
+# QUERY USER ANSWERS
+# # http://api.stackexchange.com/docs/answers-on-users#order=desc&sort=activity&ids=402322&filter=!9j_cPvogJ&site=stackoverflow&run=true
 else
 {
 	$showing_type = 'Answers';
 	if( 'asc' == $sort_order )
-		$request = $user->Answers()->SortByCreation()->Ascending()->Filter($filter->GetID())->Exec()->Page($current_page)->Pagesize($per_page);
+		$request = $user->Answers()->SortByCreation()->Ascending()->Filter('!--btTJsIW3F3')->Exec()->Page($current_page)->Pagesize($per_page);
 	else
-		$request = $user->Answers()->SortByCreation()->Descending()->Filter($filter->GetID())->Exec()->Page($current_page)->Pagesize($per_page);
+		$request = $user->Answers()->SortByCreation()->Descending()->Filter('!--btTJsIW3F3')->Exec()->Page($current_page)->Pagesize($per_page);
 }	
 # END QUERY
 

@@ -7,6 +7,7 @@ require_once 'format.php';
   * This class provides means of customizing the display and formatting
   * of a column in a table.
   */
+if( !class_exists( 'TableColumn' ) ):
 class TableColumn
 {
     // Storage for properties of this column
@@ -90,4 +91,4 @@ class TableColumn
     }
 }
 
-?>
+endif;

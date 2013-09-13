@@ -6,6 +6,7 @@ require_once 'question_request.php';
 require_once 'tag_synonym_request.php';
 
 /// A request for tags.
+if( !class_exists( 'TagRequest' ) ):
 class TagRequest extends PagedRequest
 {
     /// Constructor for a tag request.
@@ -113,4 +114,4 @@ class TagRequest extends PagedRequest
     }
 }
 
-?>
+endif;

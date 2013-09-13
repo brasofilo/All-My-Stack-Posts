@@ -12,6 +12,7 @@ require_once 'cache_base.php';
   * ensuring atomic access to the index. You will not be able to
   * guarantee consistency if this method is not available.
   */
+if( !class_exists( 'FilestoreCache' ) ):
 class FilestoreCache implements CacheBase
 {
     // Information for the filestore
@@ -232,4 +233,4 @@ class FilestoreCache implements CacheBase
     }
 }
 
-?>
+endif;

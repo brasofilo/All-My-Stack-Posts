@@ -126,7 +126,7 @@ HTML;
 		$author = $answer['owner']['display_name'];
 		$authorlink = isset( $answer['owner']['link'] ) 
 				? $answer['owner']['link'] : '#';
-		$date = date('d/m/Y', $answer['creation_date'] );
+		$date = isset( $answer['creation_date'] ) ? ' | '.date('d/m/Y', $answer['creation_date'] ) : '';
 		$avatar = $this->get_avatar( $answer );
 		
 		# Output
@@ -135,7 +135,7 @@ HTML;
 
 			<div class="answer-title $accepted_bg">$avatar $score
 
-			<a href="$authorlink" class="user-link">$author</a><span class="user-link"> | $date</span> $accepted_arrow</div>
+			<a href="$authorlink" class="user-link">$author</a><span class="user-link">$date</span> $accepted_arrow</div>
 
 			$body
 		</div>

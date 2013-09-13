@@ -3,6 +3,7 @@
 require_once 'paged_request.php';
 
 /// A request for suggested edits.
+if( !class_exists( 'SuggestedEditRequest' ) ):
 class SuggestedEditRequest extends PagedRequest
 {
     /// Constructor for a suggested edit request.
@@ -40,4 +41,4 @@ class SuggestedEditRequest extends PagedRequest
     }
 }
 
-?>
+endif;

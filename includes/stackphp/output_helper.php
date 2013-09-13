@@ -1,7 +1,9 @@
 <?php
 
+if( !class_exists( 'API' ) ):
 require_once 'api.php';
 require_once 'auth.php';
+endif;
 require_once 'combobox_output.php';
 require_once 'table_output.php';
 
@@ -12,6 +14,7 @@ require_once 'table_output.php';
   * returned by a PagedResponse object to a combobox, a table (with sorting),
   * etc.
   */
+if( !class_exists( 'OutputHelper' ) ):
 class OutputHelper
 {
     /// Retrieves the contents of the helper JavaScript file as a string.
@@ -83,4 +86,4 @@ class OutputHelper
     }
 }
 
-?>
+endif;

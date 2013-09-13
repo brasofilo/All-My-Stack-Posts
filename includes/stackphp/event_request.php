@@ -3,6 +3,7 @@
 require_once 'paged_request.php';
 
 /// A request for events.
+if( !class_exists( 'EventRequest' ) ):
 class EventRequest extends PagedRequest
 {
     /// Constructor for a badge request.
@@ -32,4 +33,4 @@ class EventRequest extends PagedRequest
     }
 }
 
-?>
+endif;

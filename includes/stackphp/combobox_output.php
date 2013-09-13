@@ -1,8 +1,14 @@
 <?php
+/**
+ * MOD BY brasofilo:
+ * 
+ * Added $meta_icon to use marghoobsuleman/ms-Dropdown
+ */
 
 require_once 'output_element.php';
 
 /// Displays the provided data in a combobox.
+if( !class_exists( 'ComboboxOutput' ) ):
 class ComboboxOutput extends OutputElement
 {
     // Indices into the response
@@ -60,7 +66,7 @@ class ComboboxOutput extends OutputElement
             {
                 $value    = ' value="' . htmlspecialchars($item[$this->value_index], ENT_QUOTES) . '"';
                 $selected = ($this->current_selection == $item[$this->value_index])?' selected="true"':'';
-				$meta_icon = ' data-image="'. $item['favicon_url'] .'"';
+				$meta_icon = isset( $item['favicon_url'] ) ? ' data-image="'. $item['favicon_url'] .'"' : '';
             }
             
             $html .= "<option{$value}{$selected}{$meta_icon}>" . (($this->name_index !== null)?$item[$this->name_index]:'[unknown]') . '</option>';
@@ -70,3 +76,4 @@ class ComboboxOutput extends OutputElement
         return $html;
     }
 }
+endif;

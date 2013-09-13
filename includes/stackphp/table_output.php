@@ -10,6 +10,7 @@ require_once 'table_column.php';
   * specify the desired columns by providing an index into the returned
   * items and specifying display options for the column.
   */
+if( !class_exists( 'TableOutput' ) ):
 class TableOutput extends OutputElement
 {
     // Stores information about the columns
@@ -147,4 +148,4 @@ class TableOutput extends OutputElement
     }
 }
 
-?>
+endif;

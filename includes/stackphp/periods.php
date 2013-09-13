@@ -1,6 +1,7 @@
 <?php
 
 /// Period values for the /tags/{TAG}/top-askers and /tags/{TAG}/top-answerers routes.
+if( !class_exists( 'Period' ) ):
 class Period
 {
     /// Returns the top users for all time.
@@ -9,4 +10,4 @@ class Period
     const Month = 'month';
 }
 
-?>
+endif;

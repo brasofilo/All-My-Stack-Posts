@@ -4,6 +4,7 @@ require_once 'paged_request.php';
 require_once 'suggested_edit_request.php';
 
 /// A request for posts.
+if( !class_exists( 'PostRequest' ) ):
 class PostRequest extends PagedRequest
 {
     /// Constructor for a post request.
@@ -57,4 +58,4 @@ class PostRequest extends PagedRequest
     }
 }
 
-?>
+endif;

@@ -19,6 +19,7 @@ require_once 'url.php';
   * received a reply containing the total number of items or it will then issue
   * an appropriate request to obtain the information.
   */
+if( !class_exists( 'PagedResponse' ) ):
 class PagedResponse
 {
 	// The URL that will serve as the base for the requests
@@ -222,4 +223,4 @@ class PagedResponse
     }
 }
 
-?>
+endif;

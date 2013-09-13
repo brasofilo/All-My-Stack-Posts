@@ -3,6 +3,7 @@
 require_once 'paged_request.php';
 
 /// A request for badges.
+if( !class_exists( 'BadgeRequest' ) ):
 class BadgeRequest extends PagedRequest
 {
     /// Constructor for a badge request.
@@ -77,4 +78,4 @@ class BadgeRequest extends PagedRequest
     }
 }
 
-?>
+endif;

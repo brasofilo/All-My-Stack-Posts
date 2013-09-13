@@ -3,6 +3,7 @@
 require_once 'post_request.php';
 
 /// A request for questions.
+if( !class_exists( 'QuestionRequest' ) ):
 class QuestionRequest extends PostRequest
 {
     /// Constructor for a question request.
@@ -213,4 +214,4 @@ class QuestionRequest extends PostRequest
     }
 }
 
-?>
+endif;

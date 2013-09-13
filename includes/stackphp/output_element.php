@@ -6,6 +6,7 @@
   * data will be retrieved from the object and displayed using the GetHTML() method,
   * which is implemented by every derived class.
   */
+if( !class_exists( 'OutputElement' ) ):
 class OutputElement
 {
     /// The response object from which data is retrieved.
@@ -40,4 +41,4 @@ class OutputElement
     }
 }
 
-?>
+endif;

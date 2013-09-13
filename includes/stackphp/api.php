@@ -54,6 +54,7 @@ require_once 'url.php';
   * instances of the Site class which is used for all other entry
   * points.
   */
+if( !class_exists( 'API' ) ):
 class API
 {
     //====================
@@ -393,4 +394,4 @@ class API
     }
 }
 
-?>
+endif;

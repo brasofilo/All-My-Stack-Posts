@@ -8,6 +8,7 @@ require_once 'suggested_edit_request.php';
 require_once 'tag_request.php';
 
 /// A request for users.
+if( !class_exists( 'UserRequest' ) ):
 class UserRequest extends PagedRequest
 {
     /// Constructor for a user request.
@@ -223,4 +224,4 @@ class UserRequest extends PagedRequest
     }
 }
 
-?>
+endif;

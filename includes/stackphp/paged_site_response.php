@@ -7,6 +7,7 @@ require_once 'paged_response.php';
 require_once 'site.php';
 
 /// Represents a response that contains a list of sites.
+if( !class_exists( 'PagedSiteResponse' ) ):
 class PagedSiteResponse extends PagedResponse
 {
     /// Constructor for a paged site response.
@@ -48,4 +49,4 @@ class PagedSiteResponse extends PagedResponse
     }
 }
 
-?>
+endif;

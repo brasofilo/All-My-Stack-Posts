@@ -1,6 +1,7 @@
 <?php
 
 /// Options and tools for formatting table values.
+if( !class_exists( 'Format' ) ):
 class Format
 {
     //====================
@@ -94,4 +95,4 @@ class Format
     }
 }
 
-?>
+endif;

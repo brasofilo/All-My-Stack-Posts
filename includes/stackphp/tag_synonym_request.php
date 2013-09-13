@@ -3,6 +3,7 @@
 require_once 'paged_request.php';
 
 /// A request for tag synonyms.
+if( !class_exists( 'TagSynonymRequest' ) ):
 class TagSynonymRequest extends PagedRequest
 {
     /// Constructor for a tag synonym request.
@@ -28,4 +29,4 @@ class TagSynonymRequest extends PagedRequest
     }
 }
 
-?>
+endif;

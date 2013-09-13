@@ -13,6 +13,7 @@ require_once 'url.php';
   * common to all derived classes, such as initializing the URL class, setting certain
   * common parameters, and issuing requests.
   */
+if( !class_exists( 'PagedRequest' ) ):
 class PagedRequest
 {
     /// The URL that will be modified as methods are called.
@@ -226,4 +227,4 @@ class PagedRequest
     }
 }
 
-?>
+endif;

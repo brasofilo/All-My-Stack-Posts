@@ -9,6 +9,7 @@ require_once 'api_exception.php';
   * data on Stack Exchange sites. All of the methods below will help you
   * authenticate and gain the appropriate permissions to access the data.
   */
+if( !class_exists( 'Auth' ) ):
 class Auth
 {
     //====================
@@ -86,4 +87,4 @@ class Auth
     }
 }
 
-?>
+endif;
